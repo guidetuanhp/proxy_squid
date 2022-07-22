@@ -35,6 +35,6 @@ echo "Done"
 }
 install_squid
 edit_network
-sleep 30
 echo "sleep 30 seconds"
+sleep 30
 update_ip
