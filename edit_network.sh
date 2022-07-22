@@ -35,3 +35,4 @@ echo "Done"
 }
 install_squid
 edit_network
+update_ip
