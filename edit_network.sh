@@ -8,7 +8,7 @@ sudo cp network.txt /etc/netplan
 cd /etc/netplan
 sudo cp 50-cloud-init.yaml 51-cloud-init.yaml 
 sudo cat 51-cloud-init.yaml network.txt > 50-cloud-init.yaml
-sudo netplan try
+sudo netplan apply
 }
 update_ip() {
 IP_ALL=$(/sbin/ip -4 -o addr show scope global | awk '{gsub(/\/.*/,"",$4); print $4}')
