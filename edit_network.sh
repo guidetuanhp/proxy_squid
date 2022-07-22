@@ -3,12 +3,12 @@ wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/squid3-install.sh 
 }
 
 edit_network() {
-wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/network.txt
-sudo cp network.txt /etc/netplan
-cd /etc/netplan
-sudo cp 50-cloud-init.yaml 51-cloud-init.yaml 
-sudo cat 51-cloud-init.yaml network.txt > 50-cloud-init.yaml
-sudo netplan apply
+#wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/network.txt
+#sudo cp network.txt /etc/netplan
+#cd /etc/netplan
+#sudo cp 50-cloud-init.yaml 51-cloud-init.yaml 
+#sudo cat 51-cloud-init.yaml network.txt > 50-cloud-init.yaml
+sudo netplan try
 }
 update_ip() {
 IP_ALL=$(/sbin/ip -4 -o addr show scope global | awk '{gsub(/\/.*/,"",$4); print $4}')
@@ -33,6 +33,6 @@ systemctl restart squid
 
 echo "Done"
 }
-install_squid
+#install_squid
 edit_network
 update_ip
