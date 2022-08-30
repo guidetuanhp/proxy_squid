@@ -1,0 +1,115 @@
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.5/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.6/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.7/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.8/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.9/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.10/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.11/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.12/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.13/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.14/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.15/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.16/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.17/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.18/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.19/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.20/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.21/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.22/24
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses:
+                - 10.0.0.23/24
+ 
