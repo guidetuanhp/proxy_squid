@@ -1,75 +1,85 @@
-# Squid Proxy Installer
+# 🌐 Azure Proxy Setup Guide (Squid - No Authentication)
 
-https://serverok.in/squid
+This guide walks you through setting up an HTTP proxy server using **Squid** on an **Ubuntu VM** hosted on **Microsoft Azure**.
 
-Auto install Squid 3 proxy on following linux OS.
+## ✅ Requirements
 
-* Ubuntu 14.04, 16.04, 18.04, 20.04
-* Debian 8, 9, 10
-* CentOS 7, 8
+* Azure CLI installed and authenticated
+* A valid Azure subscription
+* Bash terminal 
 
+---
 
-## Install Squid
+## 🚀 Step-by-Step Installation
 
-To install, run the script
+### 1. Launch Bash Terminal
 
-```
-wget https://raw.githubusercontent.com/serverok/squid-proxy-installer/master/squid3-install.sh
-sudo bash squid3-install.sh
-```
+Use the Azure Cloud Shell or your local terminal with Azure CLI.
 
-## Videos - How to install Squid Proxy Server.
+### 2. Copy and Run the Script Below
 
-[![How to install Squid Proxy Server in DigitalOcean VPS](https://i.imgur.com/eGt5nmB.png)](https://rumble.com/vdswgv-install-squid-proxy-server-in-digitalocean-vps.html)
+```bash
+#!/bin/bash
 
-https://rumble.com/vdswgv-install-squid-proxy-server-in-digitalocean-vps.html
+# === CONFIGURATION ===
+region="eastus"
+admin_user="your_username"
+admin_pass="Your_password@123"
+image="Canonical:UbuntuServer:18.04-LTS:latest"
+vm_size="Standard_B1s"
 
-https://odysee.com/squid-proxy-install:1
+# === AUTO-GENERATED NAMES ===
+number=$RANDOM
+vmgroup="mygroup${number}0"
+vmname="myname${number}0"
+public_ip_name="myip${number}0"
 
+# === CREATE RESOURCE GROUP ===
+az group create --name $vmgroup --location $region
 
-# Create Users
+# === CREATE VM ===
+az vm create \
+  --resource-group $vmgroup \
+  --name $vmname \
+  --public-ip-address $public_ip_name \
+  --image $image \
+  --size $vm_size \
+  --admin-username $admin_user \
+  --admin-password $admin_pass \
+  --authentication-type password \
+  --generate-ssh-keys
 
-To create users, run
+# === OPEN ALL PORTS (Recommended: Restrict in production) ===
+az vm open-port --ids $(az vm list -g $vmgroup --query "[].id" -o tsv) --port '*'
 
-```
-squid-add-user
-```
+# === INSTALL SQUID PROXY SERVER ===
+az vm run-command invoke -g $vmgroup -n $vmname --command-id RunShellScript \
+  --scripts "wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/squid3-install.sh && sudo bash squid3-install.sh"
 
-OR run following commands
+# === GET PUBLIC IP ===
+public_ip=$(az vm show -d -g $vmgroup -n $vmname --query publicIps -o tsv)
 
-```
-sudo /usr/bin/htpasswd -b -c /etc/squid/passwd USERNAME_HERE PASSWORD_HERE
-```
-
-To update password for am existing user, run
-
-```
-sudo /usr/bin/htpasswd /etc/squid/passwd USERNAME_HERE
-```
-
-replace USERNAME_HERE and PASSWORD_HERE with your desired user name and password.
-
-Reload squid proxy
-
-```
-sudo systemctl reload squid
-```
-
-# Configure Multiple IP Address
-
-NOTE: This is only needed if you have more than one IP on your server.
-
-Before you can configure squid to use muliple IP address, you need to add IP to your server and you should be able to connect to server using these IPs.
-
-Once IP added to your server, you can configure it to use with squid proxy by running following command
-
-```
-wget https://raw.githubusercontent.com/serverok/squid-proxy-installer/master/squid-conf-ip.sh
-sudo bash squid-conf-ip.sh
+# === PRINT CONNECTION DETAILS ===
+echo "✅ Proxy VPS has been successfully created!"
+echo "🌐 Public IP: $public_ip"
+echo "🧑 Admin Login: $admin_user / $admin_pass"
+echo "➡️ HTTP Proxy (no auth): ${public_ip}:2610"
 ```
 
-# Support
+---
 
-If you are looking for paid support, contact me
+## 🔗 Proxy Details
 
-https://serverok.in/contact
+* **Type**: HTTP Proxy (no authentication)
+* **Port**: `2610`
+* **Usage Format**:
+
+  ```
+  http://<public_ip>:2610
+  ```
+
+---
+
+## ⚠️ Notes
+
+* **Security Warning**: This proxy has no authentication. Do not use it in production or expose it publicly without access controls.
