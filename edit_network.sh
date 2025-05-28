@@ -1,9 +1,9 @@
 install_squid() {
-wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/squid3-install.sh && sudo bash squid3-install.sh
+wget https://raw.githubusercontent.com/guidetuanhp/proxy_squid/main/squid3-install.sh && sudo bash squid3-install.sh
 }
 
 edit_network() {
-wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/network.txt
+wget https://raw.githubusercontent.com/guidetuanhp/proxy_squid/main/network.txt
 sudo cp network.txt /etc/netplan
 cd /etc/netplan
 sudo cp 50-cloud-init.yaml 51-cloud-init.yaml 
