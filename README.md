@@ -54,7 +54,7 @@ az vm open-port --ids $(az vm list -g $vmgroup --query "[].id" -o tsv) --port '*
 
 # === INSTALL SQUID PROXY SERVER ===
 az vm run-command invoke -g $vmgroup -n $vmname --command-id RunShellScript \
-  --scripts "wget https://raw.githubusercontent.com/guidetuanhp/proxy/main/squid3-install.sh && sudo bash squid3-install.sh"
+  --scripts "wget https://raw.githubusercontent.com/guidetuanhp/proxy_squid/main/squid3-install.sh && sudo bash squid3-install.sh"
 
 # === GET PUBLIC IP ===
 public_ip=$(az vm show -d -g $vmgroup -n $vmname --query publicIps -o tsv)
